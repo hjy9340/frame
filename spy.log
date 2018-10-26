@@ -1,0 +1,20 @@
+1539592104432|7|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where userName=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where userName='lisi' and user0_.password='lisi123'
+1539592104442|1|rollback|connection 2||
+1539592285271|28|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592291179|1|rollback|connection 2||
+1539592486864|39|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592486882|3|rollback|connection 2||
+1539592526490|30|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592539421|1|rollback|connection 2||
+1539592546831|32|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592565696|3|rollback|connection 2||
+1539592592034|37|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592594073|2|rollback|connection 2||
+1539592704318|31|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539592713118|2|rollback|connection 2||
+1539594092136|42|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539594097183|1|rollback|connection 2||
+1539594314357|28|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539594314374|1|rollback|connection 2||
+1539594549805|32|statement|connection 2|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name=? and user0_.password=?|select user0_.id as id1_0_, user0_.name as name2_0_, user0_.password as password3_0_ from User user0_ where user0_.name='lisi' and user0_.password='lisi123'
+1539594549825|5|rollback|connection 2||

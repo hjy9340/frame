@@ -1,0 +1,352 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>接待会议管理系统（西南油气田）</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+
+    <script>
+        /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+    </script>
+</head>
+<body class="layui-layout-body">
+
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                        <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                        </a>
+                    </li>
+                    <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="#" target="_blank" title="前台">
+                            <i class="layui-icon layui-icon-website"></i>
+                        </a>
+                    </li>-->
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                            <i class="layui-icon layui-icon-refresh-3"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="../demo/index.html" target="_blank">
+                            开发示例
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+                            <i class="layui-icon layui-icon-notice"></i>
+
+                            <!-- 如果有新消息，则显示小圆点 -->
+                            <span class="layui-badge-dot"></span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="theme">
+                            <i class="layui-icon layui-icon-theme"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="note">
+                            <i class="layui-icon layui-icon-note"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="fullscreen">
+                            <i class="layui-icon layui-icon-screen-full"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;">
+                            <cite>魏广</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="set/user/info.html">基本资料</a></dd>
+                            <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                            <hr>
+                            <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        </dl>
+                    </li>
+
+                    <!-- <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                       <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                     </li>
+                     <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+                       <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                     </li>-->
+                </ul>
+            </div>
+
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-side-menu">
+                <div class="layui-side-scroll">
+                    <div class="layui-logo" lay-href="home/console.html">
+                        <img src="../images/system/logo.png" /><!--<span>西南油气田综合办公系统</span>-->
+                    </div>
+
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                        <li data-name="home" class="layui-nav-item layui-nav-itemed">
+                            <a href="javascript:;" lay-tips="主页" lay-direction="2">
+                                <i class="layui-icon layui-icon-home"></i>
+                                <cite>主页</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd data-name="console" class="layui-this">
+                                    <a lay-href="home/console.html">个人工作台</a>
+                                </dd>
+                                <dd data-name="todolist">
+                                    <a lay-href="home/todolist.html">待办事项</a>
+                                </dd>
+                                <dd data-name="donelist">
+                                    <a lay-href="home/donelist.html">已办事项</a>
+                                </dd>
+                                <dd>
+                                    <a lay-href="home/message.html">消息中心</a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li data-name="component" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="接待管理" lay-direction="2">
+                                <i class="layui-icon layui-icon-component"></i>
+                                <cite>接待管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a lay-href="#">接待计划</a></dd>
+                                <dd><a lay-href="#">行程安排</a></dd>
+                                <dd><a lay-href="#">迎接安排</a></dd>
+                                <dd><a lay-href="#">用餐准备</a></dd>
+                                <dd><a lay-href="#">房间准备</a></dd>
+                                <dd><a lay-href="#">送客安排</a></dd>
+                            </dl>
+                        </li>
+                        <li data-name="template" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="会议管理" lay-direction="2">
+                                <i class="layui-icon layui-icon-template"></i>
+                                <cite>会议管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd data-name="workorder">
+                                    <a lay-href="#">会议总览</a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">会前管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">会议计划</a></dd>
+                                        <dd><a lay-href="#">会议通知</a></dd>
+                                        <dd><a lay-href="#">参会人员</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">会中管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">会议资料</a></dd>
+                                        <dd><a lay-href="#">会场准备</a></dd>
+                                        <dd><a lay-href="#">用餐准备</a></dd>
+                                        <dd><a lay-href="#">房间准备</a></dd>
+                                        <dd><a lay-href="#">会议报到</a></dd>
+                                        <dd><a lay-href="#">车辆安排</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">会后管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">会议记录</a></dd>
+                                        <dd data-name="tags"><a lay-href="#">宣传报到</a></dd>
+                                        <dd><a lay-href="#">会后收尾</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a lay-href="#">手机端配置</a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li data-name="senior" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="文档管理" lay-direction="2">
+                                <i class="layui-icon layui-icon-senior"></i>
+                                <cite>文档管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a lay-href="#">文档上传</a></dd>
+                                <dd>
+                                    <a href="javascript:;">文档检索</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">按名称、关键字检索</a></dd>
+                                        <dd><a lay-href="#">按内容索引检索</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">文档管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">文档类别</a></dd>
+                                        <dd><a lay-href="#">文档树形</a></dd>
+                                        <dd><a lay-href="#">归档管理</a></dd>
+                                        <dd><a lay-href="#">文档修改</a></dd>
+                                        <dd><a lay-href="#">文档删除</a></dd>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li data-name="user" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="办公事务管理" lay-direction="2">
+                                <i class="layui-icon layui-icon-user"></i>
+                                <cite>办公事务管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">印控管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">用章申请</a></dd>
+                                        <dd><a lay-href="#">用章审核</a></dd>
+                                        <dd><a lay-href="#">用章确认</a></dd>
+                                        <dd><a lay-href="#">记录查询</a></dd>
+                                        <dd><a lay-href="#">印章统计</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a lay-href="#">个人日历</a>
+                                </dd>
+                                <dd>
+                                    <a lay-href="#">便签管理</a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li data-name="set" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="基础配置" lay-direction="2">
+                                <i class="layui-icon layui-icon-set"></i>
+                                <cite>基础配置</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd><a lay-href="#">组织结构</a></dd>
+                                <dd><a lay-href="#">人员信息</a></dd>
+                                <dd><a lay-href="#">车辆信息</a></dd>
+                                <dd><a lay-href="#">公章信息</a></dd>
+                                <dd><a lay-href="#">会议室信息</a></dd>
+                                <dd><a lay-href="#">会议资料默认清单</a></dd>
+                                <dd><a lay-href="#">合作宾馆酒店信息</a></dd>
+                                <dd><a lay-href="#">调研地信息</a></dd>
+                            </dl>
+                        </li>
+                        <li data-name="get" class="layui-nav-item">
+                            <a href="javascript:;" lay-tips="系统设置" lay-direction="2">
+                                <i class="layui-icon layui-icon-auz"></i>
+                                <cite>系统设置</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">数据字典</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">会议规模</a></dd>
+                                        <dd><a lay-href="#">用餐方式</a></dd>
+                                        <dd><a lay-href="#">字典2</a></dd>
+                                        <dd><a lay-href="#">字典3</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">流程管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">组件配置</a></dd>
+                                        <dd><a lay-href="#">流程配置</a></dd>
+                                        <dd><a lay-href="#">流程权限配置</a></dd>
+                                        <dd><a lay-href="#">业务流程选择</a></dd>
+                                        <dd><a lay-href="#">流转日志查询</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">权限管理</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">系统用户管理</a></dd>
+                                        <dd><a lay-href="#">系统资源管理</a></dd>
+                                        <dd><a lay-href="#">系统角色管理</a></dd>
+                                        <dd><a lay-href="#">系统授权管理</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">日志查询</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">系统登录日志</a></dd>
+                                        <dd><a lay-href="#">系统使用日志</a></dd>
+                                        <dd><a lay-href="#">邮件发送日志</a></dd>
+                                        <dd><a lay-href="#">短信发送日志</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">系统信息</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">短信网关</a></dd>
+                                        <dd><a lay-href="#">邮件网关</a></dd>
+                                    </dl>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">我的设置</a>
+                                    <dl class="layui-nav-child">
+                                        <dd><a lay-href="#">基本资料</a></dd>
+                                        <dd><a lay-href="#">修改密码</a></dd>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 页面标签 -->
+            <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                    <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                        <li class="layui-nav-item" lay-unselect>
+                            <a href="javascript:;"></a>
+                            <dl class="layui-nav-child layui-anim-fadein">
+                                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab" lay-unauto lay-allowclose="true" lay-filter="layadmin-layout-tabs">
+                    <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                        <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+                </div>
+            </div>
+
+            <!-- 辅助元素，一般用于移动设备下遮罩 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: '../layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use('index');
+    </script>
+</body>
+</html>
