@@ -88,6 +88,12 @@
             <password>Oracle123</password>
         </connectionSource>
     </appender>-->
+    <logger name="druid.sql">
+        <level value="warn" />
+    </logger>
+    <logger name="druid.sql.Statement">
+        <level value="warn" />
+    </logger>
 
     <logger name="java.sql.Connection">
         <level value="DEBUG" />
@@ -102,7 +108,7 @@
         <level value="DEBUG" />
     </logger>
     <logger name="com.sgg" level="error"></logger>
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="stdout" />
     </root>
 

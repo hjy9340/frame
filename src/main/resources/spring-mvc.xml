@@ -9,7 +9,24 @@
 
     <!-- 激活基于注解的配置 @RequestMapping, @ExceptionHandler,数据绑定 ,@NumberFormat ,
     @DateTimeFormat ,@Controller ,@Valid ,@RequestBody ,@ResponseBody等  -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven >
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+                <property name="features">
+                  <list>
+                      <value>WriteMapNullValue</value>
+                      <value>QuoteFieldNames</value>
+                  </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 视图层配置 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -21,5 +38,5 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 配置静态资源 -->
-    <mvc:resources location="WEB-INF/res/" mapping="/res/**"/>
+    <mvc:resources location="/res/" mapping="/res/**"/>
 </beans>

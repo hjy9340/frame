@@ -36,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
         LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         try {
-            User user = userService.getUser(token.getUsername(),"");
+            User user = userService.findByName(token.getUsername());
             // 账号不存在
             if (user == null) {
                 return null;

@@ -1,6 +1,6 @@
 package com.sgg.frame.controller;
 
-import cn.hutool.crypto.digest.BCrypt;
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.druid.util.StringUtils;
 import com.sgg.frame.beans.User;
 import com.sgg.frame.common.Constants;
@@ -58,7 +58,7 @@ public class LoginController {
         try {
             String password = user.getPassword();
             user = userService.findByName(user.getName());
-            String newPassword = BCrypt.hashpw(user.getPassword(),user.getSalt());//PasswordHelper.encryptPasswordR(user.getName(), password, user.getSalt());
+            String newPassword = SecureUtil.md5(password+user.getSalt());//PasswordHelper.encryptPasswordR(user.getName(), password, user.getSalt());
 
             Subject u = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), newPassword.toCharArray());

@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import static org.junit.Assert.*;
-
 public class UserServiceImplTest extends BaseTest {
 
 
@@ -17,11 +15,10 @@ public class UserServiceImplTest extends BaseTest {
     private UserService userService;
     @Test
     public void getUser() throws Exception {
-        User user =userService.getUser("lisi","lisi123");
-        Assert.assertTrue(user.getName().equals("lisi"));
+        User user =userService.findByName("admin");
     }
     @Test
-    @Rollback(value = false)
+    @Rollback(value = true)
     public void insertUser() throws Exception {
         User user=new User();
         user.setName("wangwu");

@@ -25,6 +25,7 @@
         <property name="unauthorizedUrl" value="/login"/>
         <property name="filterChainDefinitions">
             <value>
+                /druid/**=anon
                 /res/** = anon
                 /login = anon
                 /** = authc<!-- 需要认证 -->
