@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tk.mybatis.springboot.mapper.GysCpJgMapper">
+  <resultMap id="BaseResultMap" type="tk.mybatis.springboot.model.GysCpJg">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="gysbm" jdbcType="VARCHAR" property="gysbm" />
+    <result column="gysmc" jdbcType="VARCHAR" property="gysmc" />
+    <result column="cpbm" jdbcType="VARCHAR" property="cpbm" />
+    <result column="cpmc" jdbcType="VARCHAR" property="cpmc" />
+    <result column="jg" jdbcType="DECIMAL" property="jg" />
+    <result column="xyrq" jdbcType="VARCHAR" property="xyrq" />
+    <result column="ggxh" jdbcType="VARCHAR" property="ggxh" />
+    <result column="jsyq" jdbcType="VARCHAR" property="jsyq" />
+    <result column="cplb" jdbcType="VARCHAR" property="cplb" />
+    <result column="cplbmc" jdbcType="VARCHAR" property="cplbmc" />
+    <result column="pxh" jdbcType="DECIMAL" property="pxh" />
+  </resultMap>
+</mapper>

@@ -10,6 +10,10 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-appcontext.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name/>
+        <param-value/>
+    </context-param>
 
     <!-- 配置监听器 -->
     <listener>

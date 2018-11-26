@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tk.mybatis.springboot.mapper.SysMessageUserMapper">
+  <resultMap id="BaseResultMap" type="tk.mybatis.springboot.model.SysMessageUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MESSAGEID" jdbcType="INTEGER" property="messageid" />
+    <result column="TOUSER" jdbcType="VARCHAR" property="touser" />
+    <result column="TOEMAIL" jdbcType="VARCHAR" property="toemail" />
+    <result column="TOPHONE" jdbcType="VARCHAR" property="tophone" />
+    <result column="READSTATE" jdbcType="BIT" property="readstate" />
+    <result column="ISDELETE" jdbcType="BIT" property="isdelete" />
+  </resultMap>
+</mapper>

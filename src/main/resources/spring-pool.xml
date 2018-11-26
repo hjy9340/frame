@@ -3,34 +3,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-
-    <!-- 数据源，BasicDataSource,commons-dbcp -->
-    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
-        <property name="resultSetLogEnabled" value="true" />
-        <property name="statementLogEnabled" value="true" />
-        <property name="statementExecutableSqlLogEnable" value="true"></property>
-    </bean>
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://mysql.bjsgg.org:3306/frame?useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <property name="username" value="root"/>
-        <property name="password" value="Oracle123"/>
-        <property name="dbType" value = "mysql" />
-        <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="4"/>
-        <property name="proxyFilters">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
             <list>
-                <ref bean="log-filter"/>
+                <value>classpath:ds.properties</value>
             </list>
         </property>
+    </bean>
+
+    <!-- 数据源，BasicDataSource,commons-dbcp -->
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="dbType" value = "${db.dbType}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${conn.initialSize}"/>
 
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="wall,stat" />
 
     </bean>
 
+    <!--mybatis sessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="p6psyDataSource"></property>
+        <property name="mapperLocations" value="classpath*:com/sgg/frame/mapping/*.xml"></property>
+        <property name="configLocation" value="mybatis/mybatisConfig.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.sgg.frame.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
     <!-- Hibernate SesssionFactory -->
@@ -46,22 +51,23 @@
         </property>
         <property name="packagesToScan" value="com.sgg.frame.beans" />
     </bean>
-    <!-- p6spy配置 -->
-    <bean id="p6psyDataSource" class="com.p6spy.engine.spy.P6DataSource">
-        <constructor-arg ref="dataSource"></constructor-arg>
-    </bean>
-    <!-- PlatTranscationManager -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
+
     <!--HibernateTemplete-->
     <bean class="org.springframework.orm.hibernate4.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <bean class="com.sgg.frame.common.MyHibernateDaoSupport">
+    <bean class="com.sgg.frame.common.MyHibernateDaoSupport"/>
 
+
+    <!-- PlatTranscationManager -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- p6spy配置 -->
+    <bean id="p6psyDataSource" class="com.p6spy.engine.spy.P6DataSource">
 
+        <constructor-arg ref="dataSource"></constructor-arg>
+    </bean>
 </beans>
 
