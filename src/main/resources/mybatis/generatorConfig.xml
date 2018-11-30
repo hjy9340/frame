@@ -11,22 +11,53 @@
         <property name="endingDelimiter" value="`"/>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tk.mybatis.springboot.util.MyMapper"/>
+            <property name="mappers" value="com.sgg.common.mybatis.mapper.MyMapper"/>
         </plugin>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${db.url}" userId="${db.username}" password="${db.password}"/>
 
-        <javaModelGenerator targetPackage="tk.mybatis.springboot.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.sgg.frame.entity" targetProject="src/main/java"/>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="tk.mybatis.springboot.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.sgg.frame.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="%">
+        <table tableName="sys_user"  domainObjectName="User">
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->
             <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+
+        </table>
+        <table tableName="sys_menu"  domainObjectName="Menu">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_dept"  domainObjectName="Dept">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_dict"  domainObjectName="Dict">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_login_log"  domainObjectName="LoginLog">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_role"  domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_relation"  domainObjectName="Relation">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_expense"  domainObjectName="Expense">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_notice"  domainObjectName="Notice">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_operation_log"  domainObjectName="OperationLog">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_relation"  domainObjectName="Relation">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

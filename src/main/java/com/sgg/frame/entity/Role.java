@@ -1,53 +1,169 @@
 package com.sgg.frame.entity;
 
+import javax.persistence.*;
+
+@Table(name = "sys_role")
 public class Role {
+    /**
+     * 主键id
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * 序号
+     */
+    private Integer num;
+
+    /**
+     * 父角色id
+     */
+    private Integer pid;
+
+    /**
+     * 角色名称
+     */
     private String name;
 
-    private String role;
+    /**
+     * 部门名称
+     */
+    private Integer deptid;
 
-    private String description;
+    /**
+     * 提示
+     */
+    private String tips;
 
-    private Boolean isShow;
+    /**
+     * 保留字段(暂时没用）
+     */
+    private Integer version;
 
+    /**
+     * 获取主键id
+     *
+     * @return id - 主键id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * 设置主键id
+     *
+     * @param id 主键id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 获取序号
+     *
+     * @return num - 序号
+     */
+    public Integer getNum() {
+        return num;
+    }
+
+    /**
+     * 设置序号
+     *
+     * @param num 序号
+     */
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    /**
+     * 获取父角色id
+     *
+     * @return pid - 父角色id
+     */
+    public Integer getPid() {
+        return pid;
+    }
+
+    /**
+     * 设置父角色id
+     *
+     * @param pid 父角色id
+     */
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    /**
+     * 获取角色名称
+     *
+     * @return name - 角色名称
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 设置角色名称
+     *
+     * @param name 角色名称
+     */
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    /**
+     * 获取部门名称
+     *
+     * @return deptid - 部门名称
+     */
+    public Integer getDeptid() {
+        return deptid;
     }
 
-    public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
+    /**
+     * 设置部门名称
+     *
+     * @param deptid 部门名称
+     */
+    public void setDeptid(Integer deptid) {
+        this.deptid = deptid;
     }
 
-    public String getDescription() {
-        return description;
+    /**
+     * 获取提示
+     *
+     * @return tips - 提示
+     */
+    public String getTips() {
+        return tips;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    /**
+     * 设置提示
+     *
+     * @param tips 提示
+     */
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 
-    public Boolean getIsShow() {
-        return isShow;
+    /**
+     * 获取保留字段(暂时没用）
+     *
+     * @return version - 保留字段(暂时没用）
+     */
+    public Integer getVersion() {
+        return version;
     }
 
-    public void setIsShow(Boolean isShow) {
-        this.isShow = isShow;
+    /**
+     * 设置保留字段(暂时没用）
+     *
+     * @param version 保留字段(暂时没用）
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

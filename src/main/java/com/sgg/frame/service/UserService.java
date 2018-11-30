@@ -1,15 +1,16 @@
 package com.sgg.frame.service;
 
-import com.sgg.frame.beans.User;
+import com.sgg.frame.entity.SysUser;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
-    public User getUser(String username, String password) throws Exception;
-    public boolean insertUser(User user) throws Exception;
 
-    public User findByName(String name) throws Exception;
-    public com.sgg.frame.entity.User getUser(int id)throws Exception;
 
     public List getAllUser() throws Exception;
+
+    SysUser getUserByName(String username);
+
+    List<Map> getMapList() throws Exception;
 }

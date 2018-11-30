@@ -2,9 +2,9 @@ package com.sgg.frame.controller;
 
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.druid.util.StringUtils;
-import com.sgg.frame.beans.User;
 import com.sgg.frame.common.Constants;
-import com.sgg.frame.entity.ResponseData;
+import com.sgg.frame.common.entity.ResponseData;
+import com.sgg.frame.entity.SysUser;
 import com.sgg.frame.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -39,13 +39,13 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResponseData logon(HttpServletRequest req, User user, BindingResult bindingResult,
+    public ResponseData logon(HttpServletRequest req, SysUser user, BindingResult bindingResult,
                               RedirectAttributes redirectAttributes, ModelMap modelMap, boolean remenberMe)
             throws Exception {
         LOGGER.info("POST请求登录");
         String result = "";
         ResponseData data=new ResponseData();
-        if (StringUtils.isEmpty(user.getName())) {
+        if (StringUtils.isEmpty(user.getUsername())) {
             result = ("用户名不能为空");
             req.setAttribute("msg", result);
             data.setCode("");
@@ -57,11 +57,11 @@ public class LoginController {
         }
         try {
             String password = user.getPassword();
-            user = userService.findByName(user.getName());
+            user = (SysUser)userService.getAllUser().get(0);
             String newPassword = SecureUtil.md5(password+user.getSalt());//PasswordHelper.encryptPasswordR(user.getName(), password, user.getSalt());
 
             Subject u = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), newPassword.toCharArray());
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), newPassword.toCharArray());
             token.setRememberMe(true);
 
             u.login(token);
