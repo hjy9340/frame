@@ -1,33 +1,33 @@
 package com.sgg.frame.service.impl;
 
-import com.sgg.frame.entity.SysUser;
-import com.sgg.frame.mapper.SysUserMapper;
+
+import com.sgg.frame.entity.User;
+import com.sgg.frame.mapper.UserMapper;
 import com.sgg.frame.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    private UserMapper userMapper;
 
 
     @Override
     public List getAllUser() throws Exception {
-        return sysUserMapper.selectAll();
+        return userMapper.selectAll();
     }
 
     @Override
-    public SysUser getUserByName(String username) {
+    public User getUserByName(String username) {
         return null;
     }
 
     @Override
-    public List<Map> getMapList() throws Exception{
-        return sysUserMapper.getMapList("0");
+    public List<User> getMapList() throws Exception{
+        return userMapper.selectAll();
     }
 }

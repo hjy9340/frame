@@ -15,9 +15,10 @@
  */
 package com.sgg.frame.shiro;
 
-import com.stylefeng.guns.common.constant.Const;
-import com.stylefeng.guns.common.constant.factory.ConstantFactory;
-import com.stylefeng.guns.common.persistence.model.User;
+
+import com.sgg.frame.common.constants.constant.Const;
+import com.sgg.frame.common.constants.constant.factory.ConstantFactory;
+import com.sgg.frame.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;

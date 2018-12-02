@@ -15,12 +15,13 @@
  */
 package com.sgg.frame.shiro.check;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
+import com.sgg.frame.common.util.SpringContextHolder;
+import com.sgg.frame.shiro.ShiroKit;
+import com.sgg.frame.shiro.ShiroUser;
 import com.stylefeng.guns.core.listener.ConfigListener;
-import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.core.shiro.ShiroUser;
-import com.stylefeng.guns.core.support.CollectionKit;
-import com.stylefeng.guns.core.support.HttpKit;
-import com.stylefeng.guns.core.util.SpringContextHolder;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,7 @@ public class PermissionCheckFactory implements ICheck {
         if (null == user) {
             return false;
         }
-        String join = CollectionKit.join(permissions, ",");
+        String join = ArrayUtil.join(permissions, ",");
         if (ShiroKit.hasAnyRoles(join)) {
             return true;
         }
@@ -54,7 +55,7 @@ public class PermissionCheckFactory implements ICheck {
 
     @Override
     public boolean checkAll() {
-        HttpServletRequest request = HttpKit.getRequest();
+        HttpServletRequest request = HttpUtil.getRequest();
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
             return false;

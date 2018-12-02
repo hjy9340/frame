@@ -1,7 +1,7 @@
 package com.sgg.frame.shiro;
 
 import com.google.common.collect.Sets;
-import com.sgg.frame.entity.SysUser;
+import com.sgg.frame.entity.User;
 import com.sgg.frame.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -36,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
         LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         try {
-            SysUser user = userService.getUserByName(token.getUsername());
+            User user = userService.getUserByName(token.getUsername());
             // 账号不存在
             if (user == null) {
                 return null;
@@ -56,7 +56,7 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
 
-        SysUser shiroUser = (SysUser) principals.getPrimaryPrincipal();
+        User shiroUser = (User) principals.getPrimaryPrincipal();
         Set<String> urlSet = Sets.newHashSet();
         Set<String> roles = Sets.newHashSet();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

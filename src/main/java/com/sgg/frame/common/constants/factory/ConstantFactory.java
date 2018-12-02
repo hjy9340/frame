@@ -1,14 +1,13 @@
 package com.sgg.frame.common.constants.factory;
 
-import com.stylefeng.guns.common.constant.state.ManagerStatus;
-import com.stylefeng.guns.common.constant.state.MenuStatus;
-import com.stylefeng.guns.common.persistence.dao.*;
-import com.stylefeng.guns.common.persistence.model.*;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.support.StrKit;
-import com.stylefeng.guns.core.util.Convert;
-import com.stylefeng.guns.core.util.SpringContextHolder;
-import com.stylefeng.guns.core.util.ToolUtil;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import com.sgg.frame.common.constants.constant.state.ManagerStatus;
+import com.sgg.frame.common.constants.constant.state.MenuStatus;
+import com.sgg.frame.common.util.SpringContextHolder;
+import com.sgg.frame.entity.*;
+import com.sgg.frame.mapper.*;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
@@ -78,11 +77,11 @@ public class ConstantFactory implements IConstantFactory {
         StringBuilder sb = new StringBuilder();
         for (int role : roles) {
             Role roleObj = roleMapper.selectByPrimaryKey(role);
-            if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
+            if (ObjectUtil.isNotNull(roleObj) && StrUtil.isNotEmpty(roleObj.getName())) {
                 sb.append(roleObj.getName()).append(",");
             }
         }
-        return StrKit.removeSuffix(sb.toString(), ",");
+        return StrUtil.removeSuffix(sb.toString(), ",");
     }
 
     /**
@@ -94,7 +93,7 @@ public class ConstantFactory implements IConstantFactory {
             return "--";
         }
         Role roleObj = roleMapper.selectByPrimaryKey(roleId);
-        if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
+        if (ObjectUtil.isNotNull(roleObj) && StrUtil.isNotEmpty(roleObj.getName())) {
             return roleObj.getName();
         }
         return "";
@@ -109,7 +108,7 @@ public class ConstantFactory implements IConstantFactory {
             return "--";
         }
         Role roleObj = roleMapper.selectByPrimaryKey(roleId);
-        if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
+        if (ObjectUtil.isNotNull(roleObj) && StrUtil.isNotEmpty(roleObj.getName())) {
             return roleObj.getTips();
         }
         return "";
@@ -121,7 +120,7 @@ public class ConstantFactory implements IConstantFactory {
     @Override
     public String getDeptName(Integer deptId) {
         Dept dept = deptMapper.selectByPrimaryKey(deptId);
-        if (ToolUtil.isNotEmpty(dept) && ToolUtil.isNotEmpty(dept.getFullname())) {
+        if (ObjectUtil.isNotNull(dept) && StrUtil.isNotEmpty(dept.getFullname())) {
             return dept.getFullname();
         }
         return "";
@@ -136,11 +135,11 @@ public class ConstantFactory implements IConstantFactory {
         StringBuilder sb = new StringBuilder();
         for (int menu : menus) {
             Menu menuObj = menuMapper.selectByPrimaryKey(menu);
-            if (ToolUtil.isNotEmpty(menuObj) && ToolUtil.isNotEmpty(menuObj.getName())) {
+            if (ObjectUtil.isNotNull(menuObj) && StrUtil.isNotEmpty(menuObj.getName())) {
                 sb.append(menuObj.getName()).append(",");
             }
         }
-        return StrKit.removeSuffix(sb.toString(), ",");
+        return StrUtil.removeSuffix(sb.toString(), ",");
     }
 
     /**
@@ -148,7 +147,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getMenuName(Integer menuId) {
-        if (ToolUtil.isEmpty(menuId)) {
+        if (ObjectUtil.isNotNull(menuId)) {
             return "";
         } else {
             Menu menu = menuMapper.selectByPrimaryKey(menuId);
@@ -165,7 +164,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getMenuNameByCode(String code) {
-        if (ToolUtil.isEmpty(code)) {
+        if (ObjectUtil.isNotNull(code)) {
             return "";
         } else {
             Menu param = new Menu();
@@ -184,7 +183,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getDictName(Integer dictId) {
-        if (ToolUtil.isEmpty(dictId)) {
+        if (ObjectUtil.isNotNull(dictId)) {
             return "";
         } else {
             Dict dict = dictMapper.selectByPrimaryKey(dictId);
@@ -201,7 +200,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getNoticeTitle(Integer dictId) {
-        if (ToolUtil.isEmpty(dictId)) {
+        if (ObjectUtil.isNotNull(dictId)) {
             return "";
         } else {
             Notice notice = noticeMapper.selectByPrimaryKey(dictId);
@@ -265,7 +264,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public List<Dict> findInDict(Integer id) {
-        if (ToolUtil.isEmpty(id)) {
+        if (ObjectUtil.isNotNull(id)) {
             return null;
         } else {
             Example example = new Example(Dict.class);
@@ -284,7 +283,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getCacheObject(String para) {
-        return LogObjectHolder.me().get().toString();
+        return null;//LogObjectHolder.me().get().toString();
     }
 
     /**
@@ -318,7 +317,7 @@ public class ConstantFactory implements IConstantFactory {
         String[] split = pids.split(",");
         ArrayList<Integer> parentDeptIds = new ArrayList<>();
         for (String s : split) {
-            parentDeptIds.add(Integer.valueOf(StrKit.removeSuffix(StrKit.removePrefix(s, "["), "]")));
+            parentDeptIds.add(Integer.valueOf(StrUtil.removeSuffix(StrUtil.removePrefix(s, "["), "]")));
         }
         return parentDeptIds;
     }

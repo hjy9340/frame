@@ -1,6 +1,7 @@
 package com.sgg.frame.common.constants.constant.dictmap;
 
-import com.stylefeng.guns.common.constant.dictmap.base.AbstractDictMap;
+
+import com.sgg.frame.common.constants.constant.dictmap.base.AbstractDictMap;
 
 /**
  * 角色的字典

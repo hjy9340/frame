@@ -1,16 +1,16 @@
 package com.sgg.frame.service;
 
-import com.sgg.frame.entity.SysUser;
+
+import com.sgg.frame.entity.User;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
 
     public List getAllUser() throws Exception;
 
-    SysUser getUserByName(String username);
+    User getUserByName(String username);
 
-    List<Map> getMapList() throws Exception;
+    List<User> getMapList() throws Exception;
 }

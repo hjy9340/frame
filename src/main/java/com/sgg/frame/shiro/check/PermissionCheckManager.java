@@ -15,7 +15,8 @@
  */
 package com.sgg.frame.shiro.check;
 
-import com.stylefeng.guns.core.util.SpringContextHolder;
+
+import com.sgg.frame.common.util.SpringContextHolder;
 
 /**
  * 权限检查工厂
