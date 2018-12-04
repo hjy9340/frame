@@ -1,8 +1,10 @@
 package com.sgg.frame.common.constants.dictmap.factory;
 
 
-import com.sgg.frame.common.constants.constant.dictmap.base.AbstractDictMap;
-import com.sgg.frame.common.constants.constant.dictmap.base.SystemDict;
+import com.sgg.common.exception.BizExceptionEnum;
+import com.sgg.common.exception.BussinessException;
+import com.sgg.frame.common.constants.dictmap.base.AbstractDictMap;
+import com.sgg.frame.common.constants.dictmap.base.SystemDict;
 
 /**
  * 字典的创建工厂
@@ -25,7 +27,7 @@ public class DictMapFactory {
                 Class<AbstractDictMap> clazz = (Class<AbstractDictMap>) Class.forName(basePath + className);
                 return clazz.newInstance();
             } catch (Exception e) {
-                //throw new BussinessException(BizExceptionEnum.ERROR_CREATE_DICT);
+                throw new BussinessException(BizExceptionEnum.ERROR_CREATE_DICT);
             }
         }
     }

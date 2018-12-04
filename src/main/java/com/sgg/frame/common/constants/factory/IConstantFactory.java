@@ -1,8 +1,8 @@
 package com.sgg.frame.common.constants.factory;
 
-import com.sgg.frame.common.constants.constant.cache.Cache;
-import com.sgg.frame.common.constants.constant.cache.CacheKey;
-import com.sgg.frame.entity.Dict;
+import com.sgg.frame.common.constants.cache.Cache;
+import com.sgg.frame.common.constants.cache.CacheKey;
+import com.sgg.frame.modulers.system.entity.Dict;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;

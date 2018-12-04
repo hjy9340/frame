@@ -1,8 +1,10 @@
 package com.sgg.frame.common.constants.dictmap.factory;
 
 
-import com.sgg.frame.common.constants.constant.factory.ConstantFactory;
-import com.sgg.frame.common.constants.constant.factory.IConstantFactory;
+import com.sgg.common.exception.BizExceptionEnum;
+import com.sgg.common.exception.BussinessException;
+import com.sgg.frame.common.constants.factory.ConstantFactory;
+import com.sgg.frame.common.constants.factory.IConstantFactory;
 
 import java.lang.reflect.Method;
 
@@ -26,7 +28,7 @@ public class DictFieldWarpperFactory {
                 Object result = method.invoke(me, Integer.parseInt(field.toString()));
                 return result;
             } catch (Exception e1) {
-                //throw new BussinessException(BizExceptionEnum.ERROR_WRAPPER_FIELD);
+                throw new BussinessException(BizExceptionEnum.ERROR_WRAPPER_FIELD);
             }
         }
     }

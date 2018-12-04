@@ -1,6 +1,6 @@
 package com.sgg.frame.common.constants.dictmap;
 
-import com.sgg.frame.common.constants.constant.dictmap.base.AbstractDictMap;
+import com.sgg.frame.common.constants.dictmap.base.AbstractDictMap;
 
 /**
  * 部门的映射

@@ -1,7 +1,7 @@
 package com.sgg.frame.shiro.factory;
 
 
-import com.sgg.frame.entity.User;
+import com.sgg.frame.modulers.system.entity.User;
 import com.sgg.frame.shiro.ShiroUser;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 

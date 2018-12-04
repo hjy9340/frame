@@ -1,8 +1,8 @@
 package com.sgg.frame.shiro;
 
 import com.google.common.collect.Sets;
-import com.sgg.frame.entity.User;
-import com.sgg.frame.service.UserService;
+import com.sgg.frame.modulers.system.entity.User;
+import com.sgg.frame.modulers.system.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

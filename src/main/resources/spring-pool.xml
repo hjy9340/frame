@@ -3,13 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:ds.properties</value>
-            </list>
-        </property>
-    </bean>
 
     <!-- 数据源，BasicDataSource,commons-dbcp -->
 
@@ -32,11 +25,13 @@
         <property name="dataSource" ref="p6psyDataSource"></property>
         <property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
         <!--mybatis 配置文件-->
+<!--
         <property name="configLocation" value="mybatis/mybatisConfig.xml"/>
-       <!-- <property name="plugins">
+-->
+       <property name="plugins">
             <list>
                 <bean class="com.github.pagehelper.PageInterceptor">
-                    &lt;!&ndash; 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 &ndash;&gt;
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
                     <property name="properties">
                         <value>
                             helperDialect=mysql
@@ -48,10 +43,10 @@
                     </property>
                 </bean>
             </list>
-        </property>-->
+        </property>
     </bean>
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.sgg.frame.mapper" />
+        <property name="basePackage" value="com.sgg.frame.modulers.system.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

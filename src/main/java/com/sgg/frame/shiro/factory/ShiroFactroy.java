@@ -2,12 +2,12 @@ package com.sgg.frame.shiro.factory;
 
 
 import cn.hutool.core.convert.Convert;
-import com.sgg.frame.common.constants.constant.state.ManagerStatus;
+import com.sgg.frame.common.constants.state.ManagerStatus;
 import com.sgg.frame.common.constants.factory.ConstantFactory;
 import com.sgg.frame.common.util.SpringContextHolder;
-import com.sgg.frame.entity.User;
-import com.sgg.frame.mapper.MenuMapper;
-import com.sgg.frame.mapper.UserMapper;
+import com.sgg.frame.modulers.system.entity.User;
+import com.sgg.frame.modulers.system.mapper.MenuMapper;
+import com.sgg.frame.modulers.system.mapper.UserMapper;
 import com.sgg.frame.shiro.ShiroUser;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.LockedAccountException;

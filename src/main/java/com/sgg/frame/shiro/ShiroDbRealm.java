@@ -2,7 +2,7 @@ package com.sgg.frame.shiro;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.sgg.frame.entity.User;
+import com.sgg.frame.modulers.system.entity.User;
 import com.sgg.frame.shiro.factory.IShiro;
 import com.sgg.frame.shiro.factory.ShiroFactroy;
 import org.apache.shiro.authc.*;

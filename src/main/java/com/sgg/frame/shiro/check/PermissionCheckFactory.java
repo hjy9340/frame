@@ -16,15 +16,14 @@
 package com.sgg.frame.shiro.check;
 
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import com.sgg.frame.common.util.SpringContextHolder;
 import com.sgg.frame.shiro.ShiroKit;
 import com.sgg.frame.shiro.ShiroUser;
-import com.stylefeng.guns.core.listener.ConfigListener;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,12 +54,14 @@ public class PermissionCheckFactory implements ICheck {
 
     @Override
     public boolean checkAll() {
-        HttpServletRequest request = HttpUtil.getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
             return false;
         }
-        String requestURI = request.getRequestURI().replace(ConfigListener.getConf().get("contextPath"), "");
+        String ctxPath=request.getContextPath();
+        String requestURI = request.getRequestURI().replace(ctxPath, "");
         String[] str = requestURI.split("/");
         if (str.length > 3) {
             requestURI = "/" + str[1] + "/" + str[2];
