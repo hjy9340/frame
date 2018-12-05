@@ -9,7 +9,7 @@ public class Menu {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     /**
      * 菜单编号
@@ -76,7 +76,7 @@ public class Menu {
      *
      * @return id - 主键id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -85,7 +85,7 @@ public class Menu {
      *
      * @param id 主键id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,8 @@
 package com.sgg.frame.common.constants.tips;
 
 
+import com.sgg.common.exception.BizExceptionEnum;
+
 /**
  * 返回给前台的错误提示
  *
@@ -15,8 +17,8 @@ public class ErrorTip extends Tip {
         this.message = message;
     }
 
-//    public ErrorTip(BizExceptionEnum bizExceptionEnum) {
-//        this.code = bizExceptionEnum.getCode();
-//        this.message = bizExceptionEnum.getMessage();
-//    }
+    public ErrorTip(BizExceptionEnum bizExceptionEnum) {
+        this.code = bizExceptionEnum.getCode();
+        this.message = bizExceptionEnum.getMessage();
+    }
 }

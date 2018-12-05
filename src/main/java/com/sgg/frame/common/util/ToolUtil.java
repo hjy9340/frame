@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sgg.frame.util;
+package com.sgg.frame.common.util;
 
 
 import com.sgg.common.properties.PropertyConfigurer;
-import com.sgg.frame.common.util.SpringContextHolder;
 
 import java.io.IOException;
 import java.io.PrintWriter;

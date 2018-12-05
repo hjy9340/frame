@@ -5,17 +5,21 @@ import com.sgg.common.annotion.Permission;
 import com.sgg.common.annotion.log.BussinessLog;
 import com.sgg.common.exception.BizExceptionEnum;
 import com.sgg.common.exception.BussinessException;
+import com.sgg.common.properties.PropertyConfigurer;
 import com.sgg.frame.common.constants.Const;
 import com.sgg.frame.common.constants.Dict;
 import com.sgg.frame.common.constants.factory.ConstantFactory;
 import com.sgg.frame.common.constants.state.ManagerStatus;
 import com.sgg.frame.common.constants.tips.Tip;
 import com.sgg.frame.common.controller.BaseController;
+import com.sgg.frame.common.log.LogObjectHolder;
+import com.sgg.frame.common.util.SpringContextHolder;
+import com.sgg.frame.common.util.ToolUtil;
 import com.sgg.frame.modulers.system.entity.User;
 import com.sgg.frame.modulers.system.mapper.UserMapper;
+import com.sgg.frame.modulers.system.warpper.UserWarpper;
 import com.sgg.frame.shiro.ShiroKit;
 import com.sgg.frame.shiro.ShiroUser;
-import com.sgg.frame.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -330,7 +334,7 @@ public class UserMgrController extends BaseController {
     public String upload(@RequestPart("file") MultipartFile picture) {
         String pictureName = UUID.randomUUID().toString() + ".jpg";
         try {
-            String fileSavePath = gunsProperties.getFileUploadPath();
+            String fileSavePath = SpringContextHolder.getBean(PropertyConfigurer.class).getProperty("fileuploadpath");
             picture.transferTo(new File(fileSavePath + pictureName));
         } catch (Exception e) {
             throw new BussinessException(BizExceptionEnum.UPLOAD_ERROR);

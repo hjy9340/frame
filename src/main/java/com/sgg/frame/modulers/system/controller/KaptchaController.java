@@ -2,7 +2,9 @@ package com.sgg.frame.modulers.system.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import com.sgg.frame.util.FileUtil;
+import com.sgg.common.properties.PropertyConfigurer;
+import com.sgg.frame.common.util.FileUtil;
+import com.sgg.frame.common.util.SpringContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +28,6 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/kaptcha")
 public class KaptchaController {
-
-    @Resource
-    private GunsProperties gunsProperties;
 
     @Autowired
     Producer producer;
@@ -98,7 +97,7 @@ public class KaptchaController {
      */
     @RequestMapping("/{pictureId}")
     public void renderPicture(@PathVariable("pictureId") String pictureId, HttpServletResponse response) {
-        String path = gunsProperties.getFileUploadPath() + pictureId + ".jpg";
+        String path = SpringContextHolder.getBean(PropertyConfigurer.class).getProperty("kaptchaOpen")+ pictureId + ".jpg";
         try {
             byte[] bytes = FileUtil.toByteArray(path);
             response.getOutputStream().write(bytes);

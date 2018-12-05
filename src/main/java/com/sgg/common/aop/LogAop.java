@@ -1,15 +1,16 @@
 package com.sgg.common.aop;
 
-import com.stylefeng.guns.common.annotion.log.BussinessLog;
-import com.stylefeng.guns.common.constant.dictmap.base.AbstractDictMap;
-import com.stylefeng.guns.common.constant.dictmap.factory.DictMapFactory;
-import com.stylefeng.guns.core.log.LogManager;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.log.factory.LogTaskFactory;
-import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.core.shiro.ShiroUser;
-import com.stylefeng.guns.core.support.HttpKit;
-import com.stylefeng.guns.core.util.Contrast;
+
+import com.sgg.common.annotion.log.BussinessLog;
+import com.sgg.frame.common.constants.dictmap.base.AbstractDictMap;
+import com.sgg.frame.common.constants.dictmap.factory.DictMapFactory;
+import com.sgg.frame.common.log.LogManager;
+import com.sgg.frame.common.log.LogObjectHolder;
+import com.sgg.frame.common.log.factory.LogTaskFactory;
+import com.sgg.frame.common.util.Contrast;
+import com.sgg.frame.common.util.HttpKit;
+import com.sgg.frame.shiro.ShiroKit;
+import com.sgg.frame.shiro.ShiroUser;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;

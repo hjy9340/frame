@@ -1,4 +1,4 @@
-package com.sgg.frame.util;
+package com.sgg.frame.common.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.sgg.frame.util;
+package com.sgg.frame.common.util;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;

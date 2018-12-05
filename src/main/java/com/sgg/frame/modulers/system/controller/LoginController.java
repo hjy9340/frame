@@ -4,12 +4,14 @@ import com.google.code.kaptcha.Constants;
 import com.sgg.common.exception.InvalidKaptchaException;
 import com.sgg.frame.common.controller.BaseController;
 import com.sgg.frame.common.entity.MenuNode;
+import com.sgg.frame.common.log.LogManager;
+import com.sgg.frame.common.log.factory.LogTaskFactory;
 import com.sgg.frame.modulers.system.entity.User;
 import com.sgg.frame.modulers.system.mapper.MenuMapper;
 import com.sgg.frame.modulers.system.mapper.UserMapper;
 import com.sgg.frame.shiro.ShiroKit;
 import com.sgg.frame.shiro.ShiroUser;
-import com.sgg.frame.util.ToolUtil;
+import com.sgg.frame.common.util.ToolUtil;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-import static com.stylefeng.guns.core.support.HttpKit.getIp;
+import static com.sgg.frame.common.util.HttpKit.getIp;
+
 
 /**
  * 登录控制器

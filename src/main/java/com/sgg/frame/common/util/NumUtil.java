@@ -1,4 +1,4 @@
-package com.sgg.frame.util;
+package com.sgg.frame.common.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

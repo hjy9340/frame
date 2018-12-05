@@ -1,13 +1,19 @@
 package com.sgg.frame.modulers.system.controller;
 
 
+import com.sgg.common.annotion.Permission;
+import com.sgg.common.annotion.log.BussinessLog;
 import com.sgg.common.exception.BizExceptionEnum;
 import com.sgg.common.exception.BussinessException;
 import com.sgg.frame.common.constants.Const;
 import com.sgg.frame.common.constants.factory.ConstantFactory;
 import com.sgg.frame.common.controller.BaseController;
+import com.sgg.frame.common.log.LogObjectHolder;
+import com.sgg.frame.common.util.ToolUtil;
+import com.sgg.frame.modulers.system.entity.Dict;
 import com.sgg.frame.modulers.system.mapper.DictMapper;
-import com.sgg.frame.util.ToolUtil;
+import com.sgg.frame.modulers.system.service.IDictService;
+import com.sgg.frame.modulers.system.warpper.DictWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,7 +78,7 @@ public class DictController extends BaseController {
      *
      * @param dictValues 格式例如   "1:启用;2:禁用;3:冻结"
      */
-    @BussinessLog(value = "添加字典记录", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "添加字典记录", key = "dictName,dictValues", dict = com.sgg.frame.common.constants.Dict.DictMap)
     @RequestMapping(value = "/add")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -108,7 +114,7 @@ public class DictController extends BaseController {
     /**
      * 修改字典
      */
-    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = com.stylefeng.guns.common.constant.Dict.DictMap)
+    @BussinessLog(value = "修改字典", key = "dictName,dictValues", dict = com.sgg.frame.common.constants.Dict.DictMap)
     @RequestMapping(value = "/update")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
@@ -123,7 +129,7 @@ public class DictController extends BaseController {
     /**
      * 删除字典记录
      */
-    @BussinessLog(value = "删除字典记录", key = "dictId", dict = com.stylefeng.guns.common.constant.Dict.DeleteDict)
+    @BussinessLog(value = "删除字典记录", key = "dictId", dict = com.sgg.frame.common.constants.Dict.DeleteDict)
     @RequestMapping(value = "/delete")
     @Permission(Const.ADMIN_NAME)
     @ResponseBody

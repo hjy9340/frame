@@ -1,11 +1,17 @@
 package com.sgg.frame.modulers.system.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.github.pagehelper.PageHelper;
+import com.sgg.common.annotion.Permission;
+import com.sgg.common.annotion.log.BussinessLog;
+import com.sgg.common.web.page.PageReq;
+import com.sgg.frame.common.constants.Const;
 import com.sgg.frame.common.constants.state.BizLogType;
 import com.sgg.frame.common.controller.BaseController;
 import com.sgg.frame.modulers.system.entity.OperationLog;
 import com.sgg.frame.modulers.system.mapper.LoginLogMapper;
 import com.sgg.frame.modulers.system.mapper.OperationLogMapper;
+import com.sgg.frame.modulers.system.warpper.LogWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +69,7 @@ public class LogController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable Integer id) {
         OperationLog operationLog = operationLogMapper.selectByPrimaryKey(id);
-        Map<String, Object> stringObjectMap = BeanKit.beanToMap(operationLog);
+        Map<String, Object> stringObjectMap = BeanUtil.beanToMap(operationLog);
         return super.warpObject(new LogWarpper(stringObjectMap));
     }
 

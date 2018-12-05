@@ -9,12 +9,14 @@
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
-
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="com.sgg.common.mybatis.mapper.MyMapper"/>
         </plugin>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${db.url}" userId="${db.username}" password="${db.password}"/>
 
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
         <javaModelGenerator targetPackage="com.sgg.frame.modulers.system.entity" targetProject="src/main/java"/>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>

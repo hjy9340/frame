@@ -1,8 +1,8 @@
 package com.sgg.frame.modulers.system.entity;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.*;
 
 @Table(name = "sys_expense")
 public class Expense {

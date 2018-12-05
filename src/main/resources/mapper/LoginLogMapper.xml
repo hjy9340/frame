@@ -13,4 +13,30 @@
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="message" jdbcType="LONGVARCHAR" property="message" />
   </resultMap>
+  <select id="getLoginLog" resultType="map">
+    select * from sys_login_log where 1=1
+    <where>
+      <if test="beginTime!=null and beginTime!='' and endTime!=null and endTime!=''">
+        and createtime between concat(#{beginTime},' 00:00:00') and concat(#{endTime},' 23:59:59'))
+      </if>
+      <if test="logName!=null and logName!=''">
+        and logname like concat('%',#{logname},'%')
+      </if>
+      <choose>
+        <when test="orderByField != null and orderByField !=''">
+          <choose>
+            <when test="isAsc">
+              order by ${orderByField} ASC
+            </when>
+            <otherwise>
+              order by ${orderByField} DESC
+            </otherwise>
+          </choose>
+        </when>
+        <otherwise>
+          order by createtime DESC
+        </otherwise>
+      </choose>
+    </where>
+  </select>
 </mapper>

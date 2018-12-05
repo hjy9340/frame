@@ -2,8 +2,11 @@ package com.sgg.frame.modulers.system.controller;
 
 
 import cn.hutool.core.convert.Convert;
+import com.sgg.common.annotion.Permission;
+import com.sgg.common.annotion.log.BussinessLog;
 import com.sgg.common.exception.BizExceptionEnum;
 import com.sgg.common.exception.BussinessException;
+import com.sgg.frame.common.cache.CacheKit;
 import com.sgg.frame.common.constants.Const;
 import com.sgg.frame.common.constants.Dict;
 import com.sgg.frame.common.constants.cache.Cache;
@@ -11,11 +14,14 @@ import com.sgg.frame.common.constants.factory.ConstantFactory;
 import com.sgg.frame.common.constants.tips.Tip;
 import com.sgg.frame.common.controller.BaseController;
 import com.sgg.frame.common.entity.ZTreeNode;
+import com.sgg.frame.common.log.LogObjectHolder;
+import com.sgg.frame.common.util.ToolUtil;
 import com.sgg.frame.modulers.system.entity.Role;
 import com.sgg.frame.modulers.system.entity.User;
 import com.sgg.frame.modulers.system.mapper.RoleMapper;
 import com.sgg.frame.modulers.system.mapper.UserMapper;
-import com.sgg.frame.util.ToolUtil;
+import com.sgg.frame.modulers.system.service.IRoleService;
+import com.sgg.frame.modulers.system.warpper.RoleWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -220,7 +226,7 @@ public class RoleController extends BaseController {
             List<ZTreeNode> roleTreeList = roleMapper.roleTreeList();
             return roleTreeList;
         } else {
-            String[] strArray = Convert.toStrArray(",", roleid);
+            String[] strArray = Convert.toStrArray(roleid);
             List<ZTreeNode> roleTreeListByUserId = roleMapper.roleTreeListByRoleId(strArray);
             return roleTreeListByUserId;
         }

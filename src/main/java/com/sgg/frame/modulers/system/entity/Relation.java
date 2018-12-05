@@ -14,7 +14,7 @@ public class Relation {
     /**
      * 菜单id
      */
-    private Long menuid;
+    private Integer menuid;
 
     /**
      * 角色id
@@ -44,7 +44,7 @@ public class Relation {
      *
      * @return menuid - 菜单id
      */
-    public Long getMenuid() {
+    public Integer getMenuid() {
         return menuid;
     }
 
@@ -53,7 +53,7 @@ public class Relation {
      *
      * @param menuid 菜单id
      */
-    public void setMenuid(Long menuid) {
+    public void setMenuid(Integer menuid) {
         this.menuid = menuid;
     }
 

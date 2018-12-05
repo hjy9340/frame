@@ -1,4 +1,4 @@
-package com.sgg.frame.util;
+package com.sgg.frame.common.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

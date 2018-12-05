@@ -1,12 +1,12 @@
 package com.sgg.common.aop;
 
-import com.stylefeng.guns.common.constant.tips.ErrorTip;
-import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.exception.BussinessException;
-import com.stylefeng.guns.common.exception.InvalidKaptchaException;
-import com.stylefeng.guns.core.log.LogManager;
-import com.stylefeng.guns.core.log.factory.LogTaskFactory;
-import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.sgg.common.exception.BizExceptionEnum;
+import com.sgg.common.exception.BussinessException;
+import com.sgg.common.exception.InvalidKaptchaException;
+import com.sgg.frame.common.constants.tips.ErrorTip;
+import com.sgg.frame.common.log.LogManager;
+import com.sgg.frame.common.log.factory.LogTaskFactory;
+import com.sgg.frame.shiro.ShiroKit;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -25,8 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.UndeclaredThrowableException;
 
-import static com.stylefeng.guns.core.support.HttpKit.getIp;
-import static com.stylefeng.guns.core.support.HttpKit.getRequest;
+import static com.sgg.frame.common.util.HttpKit.getIp;
+import static com.sgg.frame.common.util.HttpKit.getRequest;
+
 
 /**
  * 全局的的异常拦截器（拦截所有的控制器）（带有@RequestMapping注解的方法上都会拦截）
