@@ -5,7 +5,6 @@ import com.google.code.kaptcha.Producer;
 import com.sgg.common.properties.PropertyConfigurer;
 import com.sgg.frame.common.util.FileUtil;
 import com.sgg.frame.common.util.SpringContextHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ import java.io.IOException;
 @RequestMapping("/kaptcha")
 public class KaptchaController {
 
-    @Autowired
+    @Resource(name="producer")
     Producer producer;
 
     /**

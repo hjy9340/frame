@@ -107,8 +107,9 @@
     <logger name="org.apache.struts2">
         <level value="DEBUG" />
     </logger>
+    <logger name="com.sgg.frame.modulers.system.mapper" level="DEBUG" />
     <logger name="com.sgg" level="error"></logger>
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="stdout" />
     </root>
 

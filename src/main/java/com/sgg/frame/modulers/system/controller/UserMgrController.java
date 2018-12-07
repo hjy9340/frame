@@ -12,6 +12,7 @@ import com.sgg.frame.common.constants.factory.ConstantFactory;
 import com.sgg.frame.common.constants.state.ManagerStatus;
 import com.sgg.frame.common.constants.tips.Tip;
 import com.sgg.frame.common.controller.BaseController;
+import com.sgg.frame.common.datascope.DataScope;
 import com.sgg.frame.common.log.LogObjectHolder;
 import com.sgg.frame.common.util.SpringContextHolder;
 import com.sgg.frame.common.util.ToolUtil;
@@ -46,9 +47,6 @@ import java.util.UUID;
 public class UserMgrController extends BaseController {
 
     private static String PREFIX = "/system/user/";
-
-    @Resource
-    private GunsProperties gunsProperties;
 
     @Resource
     private UserMapper userMapper;
@@ -170,7 +168,7 @@ public class UserMgrController extends BaseController {
     @BussinessLog(value = "添加管理员", key = "account", dict = Dict.UserDict)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip add(@Valid UserDto user, BindingResult result) {
+    public Tip add(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -187,7 +185,7 @@ public class UserMgrController extends BaseController {
         user.setStatus(ManagerStatus.OK.getCode());
         user.setCreatetime(new Date());
 
-        userMapper.insert(UserFactory.createUser(user));
+        userMapper.insert(user);
         return SUCCESS_TIP;
     }
 
@@ -199,18 +197,18 @@ public class UserMgrController extends BaseController {
     @RequestMapping("/edit")
     @BussinessLog(value = "修改管理员", key = "account", dict = Dict.UserDict)
     @ResponseBody
-    public Tip edit(@Valid UserDto user, BindingResult result) throws NoPermissionException {
+    public Tip edit(@Valid User user, BindingResult result) throws NoPermissionException {
         if (result.hasErrors()) {
             throw new BussinessException(BizExceptionEnum.REQUEST_NULL);
         }
         if (ShiroKit.hasRole(Const.ADMIN_NAME)) {
-            userMapper.updateByPrimaryKeySelective(UserFactory.createUser(user));
+            userMapper.updateByPrimaryKeySelective(user);
             return SUCCESS_TIP;
         } else {
             assertAuth(user.getId());
             ShiroUser shiroUser = ShiroKit.getUser();
             if (shiroUser.getId().equals(user.getId())) {
-                userMapper.updateByPrimaryKeySelective(UserFactory.createUser(user));
+                userMapper.updateByPrimaryKeySelective(user);
                 return SUCCESS_TIP;
             } else {
                 throw new BussinessException(BizExceptionEnum.NO_PERMITION);

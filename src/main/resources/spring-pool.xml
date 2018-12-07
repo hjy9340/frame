@@ -21,9 +21,16 @@
     </bean>
 
     <!--mybatis sessionFactory-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="p6psyDataSource"></property>
+        <bean id="sqlSessionFactory" class="com.sgg.common.mybatis.factory.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
         <property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+            <property name="configurationProperties">
+                <props>
+                    <prop key="logImpl">stdout</prop>
+                </props>
+            </property>
+            <!--实体类别名指定包自动将对应的实体类转换成小写的别名-->
+            <property name="typeAliasesPackage" value="com.sgg.frame.modulers.system.entity"/>
         <!--mybatis 配置文件-->
 <!--
         <property name="configLocation" value="mybatis/mybatisConfig.xml"/>

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sgg.frame.modulers.system.mapper.NoticeMapper">
-  <resultMap id="BaseResultMap" type="com.sgg.frame.modulers.system.entity.Notice">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="creater" jdbcType="INTEGER" property="creater" />
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sgg.frame.modulers.system.entity.Notice">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="type" property="type" />
+		<result column="content" property="content" />
+		<result column="createtime" property="createtime" />
+		<result column="creater" property="creater" />
+	</resultMap>
+
+    <select id="list" resultType="map">
+        select * from sys_notice
+        <if test="condition != null and condition != ''">
+            where title like CONCAT('%',#{condition},'%') or content like CONCAT('%',#{condition},'%')
+        </if>
+        order by createtime DESC
+    </select>
+
 </mapper>

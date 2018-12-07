@@ -1,6 +1,7 @@
 package com.sgg.frame.modulers.system.controller;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.sgg.common.annotion.Permission;
 import com.sgg.common.annotion.log.BussinessLog;
 import com.sgg.common.exception.BizExceptionEnum;
@@ -89,7 +90,7 @@ public class MenuController extends BaseController {
             menu.setPcode(String.valueOf(pMenu.getId()));
         }
 
-        Map<String, Object> menuMap = BeanKit.beanToMap(menu);
+        Map<String, Object> menuMap = BeanUtil.beanToMap(menu);
         menuMap.put("pcodeName", ConstantFactory.me().getMenuNameByCode(temp.getCode()));
         model.addAttribute("menu", menuMap);
         LogObjectHolder.me().set(menu);

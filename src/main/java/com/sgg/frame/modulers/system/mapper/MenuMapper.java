@@ -1,6 +1,8 @@
 package com.sgg.frame.modulers.system.mapper;
 
 import com.sgg.common.mybatis.mapper.MyMapper;
+import com.sgg.frame.common.entity.MenuNode;
+import com.sgg.frame.common.entity.ZTreeNode;
 import com.sgg.frame.modulers.system.entity.Menu;
 
 import java.util.List;
@@ -10,4 +12,14 @@ public interface MenuMapper extends MyMapper<Menu> {
     void deleteRelationByMenu(Integer menuId);
 
     List<Map<String, Object>> selectMenus(String menuName, String level);
+
+    List<ZTreeNode> menuTreeList();
+
+    List<Integer> getMenuIdsByRoleId(Integer roleId);
+
+    List<ZTreeNode> menuTreeListByMenuIds(List<Integer> menuIds);
+
+    List<String> getResUrlsByRoleId(Integer roleId);
+
+    List<MenuNode> getMenusByRoleIds(List<Integer> roleList);
 }

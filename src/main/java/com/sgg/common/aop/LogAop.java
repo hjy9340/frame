@@ -36,7 +36,7 @@ public class LogAop {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut(value = "@annotation(com.stylefeng.guns.common.annotion.log.BussinessLog)")
+    @Pointcut(value = "@annotation(com.sgg.common.annotion.log.BussinessLog)")
     public void cutService() {
     }
 

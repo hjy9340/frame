@@ -14,7 +14,7 @@ import com.sgg.frame.common.constants.dictmap.base.SystemDict;
  */
 public class DictMapFactory {
 
-    private static final String basePath = "com.stylefeng.guns.common.constant.dictmap.";
+    private static final String basePath = "com.sgg.frame.common.constants.dictmap.";
 
     /**
      * 通过类名创建具体的字典类
