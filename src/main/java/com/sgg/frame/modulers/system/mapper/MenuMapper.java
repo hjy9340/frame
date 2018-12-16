@@ -4,6 +4,7 @@ import com.sgg.common.mybatis.mapper.MyMapper;
 import com.sgg.frame.common.entity.MenuNode;
 import com.sgg.frame.common.entity.ZTreeNode;
 import com.sgg.frame.modulers.system.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Map;
 public interface MenuMapper extends MyMapper<Menu> {
     void deleteRelationByMenu(Integer menuId);
 
-    List<Map<String, Object>> selectMenus(String menuName, String level);
+    List<Map<String, Object>> selectMenus(@Param("condition")String menuName, @Param("level")String level);
 
     List<ZTreeNode> menuTreeList();
 
