@@ -88,28 +88,10 @@
             <password>Oracle123</password>
         </connectionSource>
     </appender>-->
-    <logger name="druid.sql">
-        <level value="warn" />
-    </logger>
-    <logger name="druid.sql.Statement">
-        <level value="warn" />
-    </logger>
 
-    <logger name="java.sql.Connection">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="java.sql.Statement">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="org.springframework.test">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="org.apache.struts2">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="com.sgg.frame.modulers.system.mapper" level="DEBUG" />
-    <logger name="com.sgg" level="error"></logger>
-    <root level="debug">
+    <logger name="com.sgg" level="DEBUG" />
+    <logger name="net.sf.ehcache" level="DEBUG"/>
+    <root level="INFO">
         <appender-ref ref="stdout" />
     </root>
 

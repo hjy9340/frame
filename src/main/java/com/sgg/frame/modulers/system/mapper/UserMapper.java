@@ -4,6 +4,7 @@ import com.sgg.common.mybatis.mapper.MyMapper;
 import com.sgg.frame.common.datascope.DataScope;
 import com.sgg.frame.modulers.system.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -51,4 +52,7 @@ public interface UserMapper extends MyMapper<User> {
      * @date 2017年2月17日 下午11:07:46
      */
     User getByAccount(@Param("account") String account);
+
+    @Select("select * from sys_user where id=1")
+    List<Map> getAll();
 }

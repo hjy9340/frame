@@ -22,7 +22,7 @@
 	</resultMap>
 
     <sql id="Base_Column_List">
-        id, account, name, birthday, sex, email, avatar,
+        id, account, concat('dddd',name), birthday, sex, email, avatar,
         phone, roleid,
         deptid, status,
         createtime, version
