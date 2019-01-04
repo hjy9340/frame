@@ -27,6 +27,7 @@ public class HmacFilter extends AccessControlFilter {
     public static final String DEFAULT_CLIENTKEY_PARAM = "clientKey";
     public static final String DEFAULT_TIMESTAMP_PARAM = "timeStamp";
     public static final String DEFAUL_DIGEST_PARAM = "digest";
+    public static final String DEFAUL_PASSWORD_PARAM="password";
  
     /**
      * 是否放行
@@ -57,16 +58,19 @@ public class HmacFilter extends AccessControlFilter {
                 WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
             }
         }
+        WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED,"request params is not accepted ");
+
         return false;//打住，访问到此为止
     }
  
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
         String clientKey = request.getParameter(DEFAULT_CLIENTKEY_PARAM);
         String timeStamp= request.getParameter(DEFAULT_TIMESTAMP_PARAM);
-        String digest= request.getParameter(DEFAUL_DIGEST_PARAM);
+        String digest= request.getParameter(DEFAUL_DIGEST_PARAM);;
+        String password= request.getParameter(DEFAUL_PASSWORD_PARAM);
         Map<String, String[]> parameters = request.getParameterMap();
         String host = request.getRemoteHost();
-        return new HmacToken(clientKey, timeStamp, digest, host,parameters);
+        return new HmacToken(clientKey,password, timeStamp, digest, host,parameters);
     }
     
     protected boolean isHmacSubmission(ServletRequest request) {

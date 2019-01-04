@@ -1,16 +1,25 @@
 package com.sgg.frame.shiro.stateless.issue;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
+import com.sgg.frame.modulers.system.entity.User;
+import com.sgg.frame.shiro.ShiroKit;
+import com.sgg.frame.shiro.ShiroUser;
+import com.sgg.frame.shiro.factory.IShiro;
+import com.sgg.frame.shiro.factory.ShiroFactroy;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +52,7 @@ public class HmacRealm extends AuthorizingRealm {
             baseString.append(hmacToken.getParameters().get(key)[0]);
         }
         //认证端生成摘要
-        String serverDigest = cryptogramService.hmacDigest(baseString.toString());
+        String serverDigest = JwtUtil.hmacDigest(baseString.toString());
         //客户端请求的摘要和服务端生成的摘要不同
         if(!serverDigest.equals(hmacToken.getDigest())){
             throw new AuthenticationException("数字摘要验证失败！！！");
@@ -51,11 +60,14 @@ public class HmacRealm extends AuthorizingRealm {
         Long visitTimeStamp = Long.valueOf(hmacToken.getTimeStamp());
         Long nowTimeStamp = System.currentTimeMillis();
         Long jge = nowTimeStamp - visitTimeStamp;
-        if (jge > 600000) {// 十分钟之前的时间戳，这是有效期可以双方约定由参数传过来
+        if (jge > 60000000) {// 一分钟之前的时间戳，这是有效期可以双方约定由参数传过来
             throw new AuthenticationException("数字摘要失效！！！");
         }
-        // 此处可以添加查询数据库检查账号是否存在、是否被锁定、是否被禁用等等逻辑
-        return new SimpleAuthenticationInfo(hmacToken.getClientKey(),Boolean.TRUE,getName());
+        IShiro shiroFactory = ShiroFactroy.me();
+        User user = shiroFactory.user(hmacToken.getClientKey());
+        ShiroUser shiroUser = shiroFactory.shiroUser(user);
+        SimpleAuthenticationInfo info = shiroFactory.info(shiroUser, user, super.getName());
+        return info;
     }
     
     /** 
@@ -63,14 +75,42 @@ public class HmacRealm extends AuthorizingRealm {
      */  
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String clientKey = (String)principals.getPrimaryPrincipal();
-        SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
-        // 根据客户标识（可以是用户名、app id等等） 查询并设置角色
-        Set<String> roles = accountProvider.loadRoles(clientKey);
-        info.setRoles(roles);
-      // 根据客户标识（可以是用户名、app id等等） 查询并设置权限
-        Set<String> permissions = accountProvider.loadPermissions(clientKey);
-        info.setStringPermissions(permissions);
-        return info;  
+
+        IShiro shiroFactory = ShiroFactroy.me();
+        ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+        List<Integer> roleList = shiroUser.getRoleList();
+
+        Set<String> permissionSet = new HashSet<>();
+        Set<String> roleNameSet = new HashSet<>();
+
+        for (Integer roleId : roleList) {
+            List<String> permissions = shiroFactory.findPermissionsByRoleId(roleId);
+            if (permissions != null) {
+                for (String permission : permissions) {
+                    if (StrUtil.isNotEmpty(permission)) {
+                        permissionSet.add(permission);
+                    }
+                }
+            }
+            String roleName = shiroFactory.findRoleNameByRoleId(roleId);
+            roleNameSet.add(roleName);
+        }
+
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addStringPermissions(permissionSet);
+        info.addRoles(roleNameSet);
+        return info;
+
+
+    }
+    /**
+     * 设置认证加密方式
+     */
+    @Override
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+        HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
+        md5CredentialsMatcher.setHashAlgorithmName(ShiroKit.hashAlgorithmName);
+        md5CredentialsMatcher.setHashIterations(ShiroKit.hashIterations);
+        super.setCredentialsMatcher(md5CredentialsMatcher);
     }
 }

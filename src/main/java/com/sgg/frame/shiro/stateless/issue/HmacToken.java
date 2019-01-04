@@ -10,16 +10,18 @@ import java.util.Map;
 public class HmacToken implements AuthenticationToken {
     private static final long serialVersionUID = -7838912794581842158L;
     public HmacToken(){}
-    public HmacToken(String clientKey, String timeStamp, String digest
+    public HmacToken(String clientKey, String password, String timeStamp, String digest
             , String host, Map<String, String[]> parameters){
         this.clientKey = clientKey;
+        this.password=password;
         this.timeStamp = timeStamp;
         this.digest = digest;
         this.host = host;
         this.parameters = parameters;
     }
     private String clientKey;// 客户标识（可以是用户名、app id等等）
-    private String digest;// 消息摘要(可以是密码)
+    private String password;//密码
+    private String digest;// 消息摘要
     private String timeStamp;// 时间戳
     private Map<String, String[]> parameters;// 访问参数
     private String host;// 客户端IP
@@ -34,6 +36,14 @@ public class HmacToken implements AuthenticationToken {
 
     public void setClientKey(String clientKey) {
         this.clientKey = clientKey;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDigest() {
@@ -76,7 +86,7 @@ public class HmacToken implements AuthenticationToken {
     }
     @Override
     public Object getCredentials() {
-        return this.digest;
+        return this.getPassword().toCharArray();
     }
     
 

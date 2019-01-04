@@ -73,6 +73,8 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getRoleName(String roleIds) {
+        if(roleIds==null)
+            return "";
         Integer[] roles = Convert.toIntArray(roleIds);
         StringBuilder sb = new StringBuilder();
         for (int role : roles) {

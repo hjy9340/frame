@@ -6,18 +6,33 @@
     <!--安全管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--设置自定义Realm-->
-        <property name="realm" ref="shiroDbRealm"/>
         <!--将缓存管理器，交给安全管理器-->
         <property name="cacheManager" ref="shiroEhcacheManager"/>
-    </bean>
+        <property name="subjectFactory" ref="subjectFactory"/>
+        <property name="sessionManager" ref="sessionManager" />
+        <property name="realms">
+            <list>
 
+                <ref bean="shiroDbRealm"/>
+                <ref bean="statelessRealm"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="subjectFactory" class="com.sgg.frame.shiro.stateless.issue.AgileSubjectFactory"/>
+    <!-- 自定义filter-->
+    <bean id="hmacFilter" class="com.sgg.frame.shiro.stateless.issue.HmacFilter"/>
     <!-- 項目自定义的Realm -->
     <bean id="shiroDbRealm" class="com.sgg.frame.shiro.ShiroDbRealm" />
-
+    <bean id="statelessRealm" class="com.sgg.frame.shiro.stateless.issue.HmacRealm"/>
     <!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- 安全管理器 -->
         <property name="securityManager" ref="securityManager"/>
+        <property name="filters">
+            <map>
+                <entry key="hmac" value-ref="hmacFilter" />
+            </map>
+        </property>
         <!-- 默认的登陆访问url -->
         <property name="loginUrl" value="/login"/>
         <!-- 登陆成功后跳转的url -->
@@ -31,11 +46,16 @@
                 /res/** = anon
                 /static/**=anon
                 /login = anon
+                /digest = anon
+                /apply-token = hmac
                 /** = user<!-- 需要认证 -->
             </value>
         </property>
     </bean>
-
+    <!--session 管理器-->
+    <bean id="sessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">
+        <property name="sessionValidationSchedulerEnabled" value="false" />
+    </bean>
     <!-- 用户授权信息Cache, 采用EhCache -->
     <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" >
         <!--<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>-->
